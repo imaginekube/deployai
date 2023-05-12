@@ -1,0 +1,19 @@
+---
+# Ansible playbook for a Phergie PHP IRC bot server.
+#
+# @author Jeff Geerling (2014).
+
+- hosts: phergie
+  gather_facts: yes
+
+  vars_files:
+    - vars/main.yml
+
+  roles:
+    - geerlingguy.firewall
+    - geerlingguy.ntp
+    - geerlingguy.repo-epel
+    - geerlingguy.repo-remi
+    - geerlingguy.git
+    - geerlingguy.php
+    - geerlingguy.phergie

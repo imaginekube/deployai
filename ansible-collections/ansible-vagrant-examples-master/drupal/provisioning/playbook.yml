@@ -1,0 +1,29 @@
+---
+# Ansible playbook for a Drupal LAMP server.
+#
+# @author Jeff Geerling (2014).
+
+- hosts: drupal
+  gather_facts: yes
+
+  vars_files:
+    - vars/main.yml
+
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt: update_cache=yes cache_valid_time=3600
+
+    - name: Add ondrej repository for later versions of PHP.
+      apt_repository: repo='ppa:ondrej/php5-5.6'
+
+  roles:
+    - geerlingguy.firewall
+    - geerlingguy.ntp
+    - geerlingguy.postfix
+    - geerlingguy.mysql
+    - geerlingguy.apache
+    - geerlingguy.php
+    - geerlingguy.php-mysql
+    - geerlingguy.composer
+    - geerlingguy.drush
+    - geerlingguy.drupal
